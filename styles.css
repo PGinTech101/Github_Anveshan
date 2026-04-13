@@ -1,0 +1,108 @@
+/* General Reset */
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: sans-serif; 
+  padding: 40px;
+}
+
+/* Search Alignment */
+#search_wrapper {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+#search_input_group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 2px solid black;
+  padding: 5px 15px;
+  border-radius: 15px;
+  margin-top: 5px;
+}
+
+#site_search {
+  border: none;
+  outline: none;
+  font-size: 1.2rem;
+  width: 250px;
+}
+
+#search_button {
+  padding: 8px 15px;
+  border: 1px solid black;
+  background: none;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+/* Card Styling */
+#card_container {
+  border: 3px solid #333;
+  border-radius: 30px;
+  padding: 40px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Top Section (Avatar + Bio) */
+#top_row {
+  display: flex;
+  gap: 30px;
+}
+
+#avatar_group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+/* --- IMAGE FIX IS HERE --- */
+#profile_circle {
+  width: 150px;
+  height: 150px;
+  border: 2px solid black;
+  border-radius: 50%;
+  overflow: hidden; /* Keeps the square image inside the round borders */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0; /* Slight background before image loads */
+}
+
+/* Targets the image you inject via JavaScript */
+#profile_circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Prevents the image from distorting */
+}
+
+#bio_group {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Box Styling (Kept as a Class because it is reused 5 times) */
+.box {
+  border: 2px solid black;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Specific Box Heights/Widths */
+#username_box { height: 30px; }
+#bio_box { flex-grow: 1; min-height: 100px; }
+#followers_box { width: 100%; }
+#repo_count_box { height: 60px; font-size: 1.3rem; }
+#profile_link_box { height: 20px; }
