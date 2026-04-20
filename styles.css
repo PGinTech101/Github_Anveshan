@@ -52,7 +52,7 @@ body {
 
 #site_search {
   flex-grow: 1;
-  padding: 5px 12px;
+  padding: 6px 12px;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-main);
   font-size: 1rem;
@@ -71,7 +71,7 @@ body {
 }
 
 #search_button {
-  padding: 5px 16px;
+  padding: 6px 16px;
   border: 1px solid rgba(27, 31, 36, 0.15);
   background-color: var(--btn-green);
   color: #ffffff;
@@ -88,7 +88,7 @@ body {
   background-color: var(--btn-green-hover);
 }
 
-/* Card Styling */
+/* Profile Card Styling */
 #card_container {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
@@ -142,7 +142,7 @@ body {
   line-height: 1.5;
 }
 
-/* Stats & Meta Rows - Cleaner, no boxes */
+/* Stats & Meta Rows */
 #stats_row, #meta_row {
   display: flex;
   flex-wrap: wrap;
@@ -195,7 +195,6 @@ body {
   text-decoration: underline;
 }
 
-/* GitHub Authentic Secondary Button */
 .github-btn-secondary {
   color: #24292f;
   background-color: #f6f8fa;
@@ -212,7 +211,6 @@ body {
   padding: 5px 12px;
   gap: 8px;
   transition: 0.2s cubic-bezier(0.3, 0, 0.5, 1);
-  transition-property: color, background-color, border-color;
 }
 
 .github-btn-secondary:hover {
@@ -220,14 +218,80 @@ body {
   border-color: rgba(27, 31, 36, 0.15);
 }
 
-/* Loader */
-.spinner {
-  display: none; 
-  margin: 0 auto 20px auto; 
-  width: 30px;
-  height: 30px;
-  border: 3px solid var(--border-color); 
-  border-top: 3px solid var(--text-muted); 
+/* --- TOP REPOSITORIES STYLES --- */
+
+#top_repos_section {
+  margin-top: 10px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 20px;
+}
+
+.section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 12px;
+}
+
+.repos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 columns by default */
+  gap: 12px;
+}
+
+.repo-card {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-main);
+  padding: 12px;
+  background-color: var(--card-bg);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color 0.2s ease;
+}
+
+.repo-card:hover {
+  border-color: var(--link-color); /* Subtle highlight on hover */
+}
+
+.repo-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--link-color);
+  text-decoration: none;
+  word-break: break-word;
+}
+
+.repo-name:hover {
+  text-decoration: underline;
+}
+
+.repo-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  flex-grow: 1; 
+  display: -webkit-box;
+  -webkit-line-clamp: 2; 
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.repo-stars {
+  font-size: 12px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Loader Styling */
+#loader {
+  display: none;
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 20px auto;
+  border: 4px solid var(--border-color);
+  border-top: 4px solid var(--link-color); /* Used the GitHub blue for the spin */
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -237,8 +301,19 @@ body {
   100% { transform: rotate(360deg); }
 }
 
-.error_msg {
-  margin-top: 15px;
-  font-size: 14px;
-  color: #cf222e;
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 480px) {
+  .repos-grid {
+    grid-template-columns: 1fr; /* Collapses to 1 column on phones */
+  }
+  
+  #top_row {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  #bio_group {
+    align-items: center;
+  }
 }

@@ -28,7 +28,7 @@ function replaceUserData(userData, username) {
     document.querySelector('#link_container').innerHTML = `<a href="${html_url}" target="_blank">View on GitHub</a>`;
 
     const btn = document.getElementById('copyBtn');
-    const copyTextSpan = document.getElementById('copyText');   
+    const copyTextSpan = document.getElementById('copyText'); 
     
     btn.onclick = async function () {
         try {
@@ -78,6 +78,7 @@ async function getGithub_profile() {
 
         const userData = await response.json();
         replaceUserData(userData,username);
+        show_topRepo(username);
 
     }
     catch(error){
@@ -94,13 +95,50 @@ async function getGithub_profile() {
   }
 }
 
+async function show_topRepo(username) {
+    try {
+        const response = await fetch(`https://api.github.com/users/${username}/repos`);
+
+        if (!response.ok) {
+            throw new Error("Couldn't fetch repositories");
+        }
+
+        const repos = await response.json();
+        const grid_container = document.getElementById('repos_grid_container');
+        const repo_section = document.getElementById('top_repos_section');
+        
+        // Show the section now that we have data
+        repo_section.style.display = 'block';
+
+        // Get top 4 to fit your 2-column grid perfectly
+        const sort_repo = repos.sort((a, b) => b.stargazers_count - a.stargazers_count).slice(0, 4);
+
+        if (sort_repo.length === 0) {
+            grid_container.innerHTML = '<p>No public repositories found.</p>';
+            return;
+        }
+
+        // Build the cards using your CSS classes!
+        grid_container.innerHTML = sort_repo.map(repo => `
+            <div class="repo-card">
+                <a href="${repo.html_url}" target="_blank" class="repo-name">${repo.name}</a>
+                <p class="repo-desc">${repo.description || 'No description available'}</p>
+                <span class="repo-stars">⭐ <span>${repo.stargazers_count}</span></span>
+            </div>
+        `).join('');
+
+    } catch (error) {
+        console.error('Error fetching repos:', error);
+        document.getElementById('repos_grid_container').innerHTML = `<p style="color: red;">Failed to load repositories.</p>`;
+    }
+}
+
 document.querySelector('#search_button').addEventListener('click', getGithub_profile);
+
 document.querySelector('#site_search').addEventListener('keydown', function(eve){
-    if(eve.key== "Enter"){
+    if(eve.key === "Enter"){
         eve.preventDefault();
         getGithub_profile();
     }
 });
-
-
 
