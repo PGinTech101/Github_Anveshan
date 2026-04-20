@@ -1,4 +1,5 @@
-# GitHub User Explorer
+# GitHub Anveshan
+## GitHub User Explorer 
 
 A web application that allows users to search GitHub profiles and view their public information and repositories.
 
